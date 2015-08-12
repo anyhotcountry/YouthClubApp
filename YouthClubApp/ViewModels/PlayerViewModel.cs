@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -30,6 +31,12 @@ namespace YouthClubApp.ViewModels
         {
             int score;
             scores.TryGetValue(game, out score);
+            return score;
+        }
+
+        public int GetScore()
+        {
+            int score = scores.Values.Sum();
             return score;
         }
 

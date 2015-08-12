@@ -8,14 +8,17 @@ namespace YouthClubApp.Views
 {
     public partial class TargetGameView : UserControl
     {
+        private Window window;
+
         public TargetGameView()
         {
             InitializeComponent();
+            Unloaded += (o, e) => window.KeyDown -= OnKeyDown;
         }
 
         private void UserControlOnLoaded(object sender, RoutedEventArgs e)
         {
-            var window = Window.GetWindow(this);
+            window = Window.GetWindow(this);
             window.KeyDown += OnKeyDown;
         }
 
@@ -23,15 +26,13 @@ namespace YouthClubApp.Views
         {
             var vm = DataContext as TargetGameViewModel;
             Point pt = CrossHairCanvas.TransformToAncestor(ParentGrid)
-                                      .Transform(new Point(-0.5 * CrossHairCanvas.ActualWidth, -0.5 * CrossHairCanvas.ActualHeight));
-            var centreX = 0.5 * ParentGrid.ActualWidth;
-            var centreY = 0.5 * ParentGrid.ActualHeight;
-            var rx = pt.X - centreX;
-            var ry = pt.Y - centreY;
+                                      .Transform(new Point(CrossHairCanvas.ActualWidth, CrossHairCanvas.ActualHeight));
+            var rx = pt.X - 0.5 * ParentGrid.ActualWidth;
+            var ry = pt.Y - 0.5 * ParentGrid.ActualHeight;
             var rsquared = rx * rx + ry * ry;
-            var outerRSquared = 0.25 * OuterEllipse.Width * OuterEllipse.Width;
-            var innerRSquared = 0.25 * InnerEllipse.Width * InnerEllipse.Width;
-            var bullseyeRSquared = 0.25 * BullsEye.Width * BullsEye.Width;
+            var outerRSquared = 0.25 * OuterEllipse.ActualWidth * OuterEllipse.ActualWidth;
+            var innerRSquared = 0.25 * InnerEllipse.ActualWidth * InnerEllipse.ActualWidth;
+            var bullseyeRSquared = 0.25 * BullsEye.ActualWidth * BullsEye.ActualWidth;
             var hitType = HitTypes.Miss;
             if (rsquared <= bullseyeRSquared)
             {

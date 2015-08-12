@@ -4,9 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:YouthClubApp.Views"
+             xmlns:helper="clr-namespace:YouthClubApp.Helpers"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <helper:ScoreConverter x:Key="GetScoreMethodConverter"/>
+        <Style x:Key="ScoresListBoxItemContainerStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Padding" Value="2,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <StackPanel Height="Auto" Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Name}" Margin="8,0,0,0"/>
+                                <TextBlock TextWrapping="Wrap" Text="{Binding Score}"/>
+                            </StackPanel>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
         <Label Content="{Binding Path=Name}" FontSize="96" />
+        <ListBox ItemsSource="{Binding Path=Scores}" 
+             ItemContainerStyle="{DynamicResource ScoresListBoxItemContainerStyle}" />
     </Grid>
 </UserControl>

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using YouthClubApp.Helpers;
+using YouthClubApp.Models;
 using YouthClubApp.Services;
 
 namespace YouthClubApp.ViewModels
@@ -25,7 +26,7 @@ namespace YouthClubApp.ViewModels
                 new PlayerViewModel("Johan", Key.E, Colors.Orange),
             };
             // Add available pages
-            PageViewModels.Add(new TargetGameViewModel(players, new SoundEffect("Loud_Gunshot.wav")));
+            PageViewModels.Add(new TargetGameViewModel(players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
             PageViewModels.Add(new ScoresViewModel(PageViewModels[0].Name, players));
             PageViewModels.Add(new ScoresViewModel(players));
 

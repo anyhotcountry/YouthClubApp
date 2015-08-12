@@ -55,11 +55,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\ScoreConverter.cs" />
+    <Compile Include="Models\TestPhysics.cs" />
+    <Compile Include="Models\GunAimPhysics.cs" />
     <Compile Include="Models\HitTypes.cs" />
+    <Compile Include="Models\IGunAimPhysics.cs" />
     <Compile Include="Services\SoundEffect.cs" />
     <Compile Include="Services\ISoundEffect.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\ScoresViewModel.cs" />
+    <Compile Include="ViewModels\ScoreViewModel.cs" />
     <Compile Include="Views\ApplicationView.xaml.cs">
       <DependentUpon>ApplicationView.xaml</DependentUpon>
     </Compile>

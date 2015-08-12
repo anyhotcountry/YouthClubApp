@@ -12,25 +12,23 @@ namespace YouthClubApp.ViewModels
     public class TargetGameViewModel : ViewModelBase, IPageViewModel
     {
         private readonly DispatcherTimer animationTimer;
-        private readonly IDictionary<Key, string> colours;
         private readonly DispatcherTimer gameTimer;
         private readonly IDictionary<Key, int> presses;
-        private readonly Random rand;
         private readonly ISoundEffect audioPlayer;
+        private readonly IGunAimPhysics gunAimPhysics;
+        private readonly Dictionary<Key, int> scores;
         private int seconds = 30;
-        private double vx;
-        private double vy;
         private PlayerViewModel[] players;
 
         public event EventHandler Close;
 
-        public TargetGameViewModel(PlayerViewModel[] players, ISoundEffect audioPlayer)
+        public TargetGameViewModel(PlayerViewModel[] players, ISoundEffect audioPlayer, IGunAimPhysics gunAimPhysics)
         {
             this.players = players;
             this.audioPlayer = audioPlayer;
+            this.gunAimPhysics = gunAimPhysics;
             presses = players.ToDictionary(p => p.Key, p => 0);
-            colours = players.ToDictionary(p => p.Key, p => p.Colour.ToString());
-            rand = new Random();
+            scores = players.ToDictionary(p => p.Key, p => 0);
             animationTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(10) };
             animationTimer.Tick += DispatcherTimerOnTick;
             animationTimer.Start();
@@ -81,23 +79,16 @@ namespace YouthClubApp.ViewModels
                 return;
             }
 
-            var shot = new ShotViewModel { X = CrossHair.X, Y = CrossHair.Y, Colour = colours[key] };
+            scores[key] += gunAimPhysics.GetScore(hitType);
+            var shot = new ShotViewModel { X = CrossHair.X, Y = CrossHair.Y };
             Shots.Add(shot);
-            vy = -2;
+            gunAimPhysics.Jerk(0, -2);
         }
 
         private void DispatcherTimerOnTick(object sender, EventArgs e)
         {
-            var fx = 0.1 * (rand.NextDouble() - 0.5);
-            var fy = 0.1 * (rand.NextDouble() - 0.5);
-            CrossHair.X = Math.Max(Math.Min(CrossHair.X + vx, 100), 0);
-            CrossHair.Y = Math.Max(Math.Min(CrossHair.Y + vy, 100), 0);
-            vx += fx;
-            vy += fy;
-            vx = CrossHair.X == 0 ? 0.5 : vx;
-            vy = CrossHair.Y == 0 ? 0.5 : vy;
-            vx = CrossHair.X == 100 ? -0.5 : vx;
-            vy = CrossHair.Y == 100 ? -0.5 : vy;
+            CrossHair.X = gunAimPhysics.NextX(CrossHair.X);
+            CrossHair.Y = gunAimPhysics.NextY(CrossHair.Y);
         }
 
         private void GameTimerOnTick(object sender, EventArgs e)
@@ -112,6 +103,11 @@ namespace YouthClubApp.ViewModels
 
         private void OnClose()
         {
+            foreach (var player in players)
+            {
+                player.SetScore(Name, scores[player.Key]);
+            }
+
             Close?.Invoke(this, EventArgs.Empty);
         }
     }
