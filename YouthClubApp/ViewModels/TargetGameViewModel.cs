@@ -22,8 +22,10 @@ namespace YouthClubApp.ViewModels
 
         public event EventHandler Close;
 
-        public TargetGameViewModel(PlayerViewModel[] players, ISoundEffect audioPlayer, IGunAimPhysics gunAimPhysics)
+        public TargetGameViewModel(string name, double radius, PlayerViewModel[] players, ISoundEffect audioPlayer, IGunAimPhysics gunAimPhysics)
         {
+            Name = name;
+            Radius = radius;
             this.players = players;
             this.audioPlayer = audioPlayer;
             this.gunAimPhysics = gunAimPhysics;
@@ -31,21 +33,19 @@ namespace YouthClubApp.ViewModels
             scores = players.ToDictionary(p => p.Key, p => 0);
             animationTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(10) };
             animationTimer.Tick += DispatcherTimerOnTick;
-            animationTimer.Start();
             gameTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             gameTimer.Tick += GameTimerOnTick;
+        }
+
+        public void Start()
+        {
+            animationTimer.Start();
             gameTimer.Start();
         }
 
-        public CrossHairViewModel CrossHair { get; } = new CrossHairViewModel { X = 50, Y = 50 };
+        public CrossHairViewModel CrossHair { get; } = new CrossHairViewModel { X = 50, Y = 100 };
 
-        public string Name
-        {
-            get
-            {
-                return "Bad Shooter";
-            }
-        }
+        public string Name { get; }
 
         public int Seconds
         {
@@ -66,6 +66,8 @@ namespace YouthClubApp.ViewModels
 
         public ObservableCollection<ShotViewModel> Shots { get; } = new ObservableCollection<ShotViewModel>();
 
+        public double Radius { get; }
+
         public void OnShot(Key key, HitTypes hitType)
         {
             if (!presses.ContainsKey(key) || presses[key]++ >= 5)
@@ -74,6 +76,7 @@ namespace YouthClubApp.ViewModels
             }
 
             audioPlayer.Play();
+            gunAimPhysics.Jerk(0, -2);
             if (hitType == HitTypes.Miss)
             {
                 return;
@@ -82,7 +85,7 @@ namespace YouthClubApp.ViewModels
             scores[key] += gunAimPhysics.GetScore(hitType);
             var shot = new ShotViewModel { X = CrossHair.X, Y = CrossHair.Y };
             Shots.Add(shot);
-            gunAimPhysics.Jerk(0, -2);
+
         }
 
         private void DispatcherTimerOnTick(object sender, EventArgs e)
@@ -95,6 +98,8 @@ namespace YouthClubApp.ViewModels
         {
             if (seconds <= 0)
             {
+                gameTimer.Stop();
+                animationTimer.Stop();
                 OnClose();
             }
 

@@ -14,16 +14,16 @@
         <Grid.Background>
             <ImageBrush ImageSource="{StaticResource BackGround}" Stretch="UniformToFill" />
         </Grid.Background>
-        <Ellipse Name="OuterEllipse" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding ActualHeight, ElementName=ParentGrid}" 
-                 Height="{Binding ActualHeight, ElementName=ParentGrid}" 
+        <Ellipse Name="OuterEllipse" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding Path=Radius}" 
+                 Height="{Binding  Path=Radius}" 
                  Fill="Blue" Stroke="Blue" StrokeThickness="0" />
         <Ellipse Name="InnerEllipse" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                 Width="{Binding ActualHeight, ElementName=ParentGrid, Converter={helpers:PercentageConverter}, ConverterParameter='0.6'}" 
-                 Height="{Binding ActualHeight, ElementName=ParentGrid, Converter={helpers:PercentageConverter}, ConverterParameter='0.6'}" 
+                 Width="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.6'}" 
+                 Height="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.6'}" 
                  Fill="Green" Stroke="Black" StrokeThickness="0" />
         <Ellipse Name="BullsEye" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                 Width="{Binding ActualHeight, ElementName=ParentGrid, Converter={helpers:PercentageConverter}, ConverterParameter='0.25'}" 
-                 Height="{Binding ActualHeight, ElementName=ParentGrid, Converter={helpers:PercentageConverter}, ConverterParameter='0.25'}" 
+                 Width="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.25'}" 
+                 Height="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.25'}" 
                  Fill="Red" Stroke="Black" StrokeThickness="0" />
         <Label HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="96" Content="{Binding Path=Seconds}" /> 
         <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding}">
@@ -58,9 +58,9 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{StaticResource BulletHole}" Width="169" Height="150">
+                    <Image Source="{StaticResource BulletHole}" Width="80" Height="80">
                         <Image.RenderTransform>
-                            <TranslateTransform X="-85" Y="-75" />
+                            <TranslateTransform X="-40" Y="-40" />
                         </Image.RenderTransform>
                     </Image>
                 </DataTemplate>

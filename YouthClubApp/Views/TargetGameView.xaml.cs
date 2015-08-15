@@ -20,6 +20,8 @@ namespace YouthClubApp.Views
         {
             window = Window.GetWindow(this);
             window.KeyDown += OnKeyDown;
+            var vm = DataContext as TargetGameViewModel;
+            vm.Start();
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)

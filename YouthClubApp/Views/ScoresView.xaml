@@ -8,30 +8,33 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <helper:ScoreConverter x:Key="GetScoreMethodConverter"/>
-        <Style x:Key="ScoresListBoxItemContainerStyle" TargetType="{x:Type ListBoxItem}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-            <Setter Property="Padding" Value="2,0,0,0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                            <StackPanel Height="Auto" Orientation="Horizontal">
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Name}" Margin="8,0,0,0"/>
-                                <TextBlock TextWrapping="Wrap" Text="{Binding Score}"/>
-                            </StackPanel>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </UserControl.Resources>
-
-    <Grid>
-        <Label Content="{Binding Path=Name}" FontSize="96" />
-        <ListBox ItemsSource="{Binding Path=Scores}" 
-             ItemContainerStyle="{DynamicResource ScoresListBoxItemContainerStyle}" />
-    </Grid>
+    <StackPanel HorizontalAlignment="Stretch" Orientation="Vertical">
+        <Label Content="{Binding Path=Name}" FontSize="64" />
+        <ListBox MinHeight="100" ItemsSource="{Binding Scores}" Grid.IsSharedSizeScope="True" HorizontalAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Navy" BorderThickness="1,3,1,5" HorizontalAlignment="Stretch">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Color="LightCyan" Offset="0.0" />
+                                <GradientStop Color="LightBlue" Offset="0.5" />
+                                <GradientStop Color="DarkTurquoise" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Grid Margin="5" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="col1" Width="*" MinWidth="500" />
+                                <ColumnDefinition SharedSizeGroup="col2" Width="*" MinWidth="500" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock VerticalAlignment="Center" FontSize="64" Grid.Column="0" Text="{Binding Path=Name}" Margin="5" />
+                            <TextBlock VerticalAlignment="Center" FontSize="64" Grid.Column="1" Text="{Binding Path=Score}" Margin="5" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button HorizontalAlignment="Right" Content="Next" Command="{Binding ButtonCommand}" 
+                CommandParameter="Close" />
+    </StackPanel>
 </UserControl>
