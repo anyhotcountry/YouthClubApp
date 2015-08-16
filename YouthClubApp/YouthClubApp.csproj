@@ -62,6 +62,7 @@
     <Compile Include="Models\IGunAimPhysics.cs" />
     <Compile Include="Services\SoundEffect.cs" />
     <Compile Include="Services\ISoundEffect.cs" />
+    <Compile Include="ViewModels\CountdownViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\ScoresViewModel.cs" />
     <Compile Include="ViewModels\ScoreViewModel.cs" />

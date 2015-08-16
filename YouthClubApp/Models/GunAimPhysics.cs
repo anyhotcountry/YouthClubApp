@@ -43,10 +43,13 @@ namespace YouthClubApp.Models
             {
                 case HitTypes.Outer:
                     return 10;
+
                 case HitTypes.Inner:
                     return 25;
+
                 case HitTypes.BullsEye:
                     return 50;
+
                 default:
                     return 0;
             }

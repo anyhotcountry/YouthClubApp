@@ -85,7 +85,6 @@ namespace YouthClubApp.ViewModels
             scores[key] += gunAimPhysics.GetScore(hitType);
             var shot = new ShotViewModel { X = CrossHair.X, Y = CrossHair.Y };
             Shots.Add(shot);
-
         }
 
         private void DispatcherTimerOnTick(object sender, EventArgs e)

@@ -10,7 +10,6 @@ namespace YouthClubApp.ViewModels
 {
     public class ApplicationViewModel : ViewModelBase
     {
-
         private ICommand changePageCommand;
         private IPageViewModel currentPageViewModel;
         private List<IPageViewModel> pageViewModels;
@@ -24,15 +23,16 @@ namespace YouthClubApp.ViewModels
                 new PlayerViewModel("Elsabe", Key.C, Colors.LightPink),
                 new PlayerViewModel("Ilana", Key.D, Colors.LightGoldenrodYellow),
                 new PlayerViewModel("Johan", Key.E, Colors.Orange),
-                new PlayerViewModel("Dad", Key.NumPad3, Colors.AliceBlue)
+                new PlayerViewModel("Dad", Key.Enter, Colors.AliceBlue),
+                new PlayerViewModel("Mum", Key.Space, Colors.AliceBlue)
             };
             // Add available pages
-            PageViewModels.Add(new TargetGameViewModel("Bad Shooter", 900, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()) { Seconds = 5 });
+            PageViewModels.Add(new TargetGameViewModel("Bad Shooter", 800, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
             PageViewModels.Add(new ScoresViewModel(PageViewModels[0].Name, players));
-            PageViewModels.Add(new TargetGameViewModel("Bad Shooter Far", 600, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
+            PageViewModels.Add(new TargetGameViewModel("Bad Shooter Far", 400, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
             PageViewModels.Add(new ScoresViewModel(PageViewModels[2].Name, players));
             PageViewModels.Add(new ScoresViewModel(players));
-            PageViewModels.Add(new TargetGameViewModel("Bad Shooter, Seriously!", 300, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
+            PageViewModels.Add(new TargetGameViewModel("Bad Shooter, Seriously!", 200, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
             PageViewModels.Add(new ScoresViewModel(PageViewModels[5].Name, players));
             PageViewModels.Add(new ScoresViewModel(players));
 
@@ -96,6 +96,5 @@ namespace YouthClubApp.ViewModels
             CurrentPageViewModel = PageViewModels
                 .FirstOrDefault(vm => vm == viewModel);
         }
-
     }
 }
