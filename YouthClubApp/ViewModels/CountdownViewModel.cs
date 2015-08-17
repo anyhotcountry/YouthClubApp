@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YouthClubApp.ViewModels
 {
-    internal class CountdownViewModel
+    public class CountdownViewModel
     {
     }
 }
