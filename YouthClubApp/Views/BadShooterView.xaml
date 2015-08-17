@@ -4,7 +4,7 @@
         xmlns:vm="clr-namespace:YouthClubApp.ViewModels"
         xmlns:helpers="clr-namespace:YouthClubApp.Helpers"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
-        x:Class="YouthClubApp.Views.TargetGameView" Loaded="UserControlOnLoaded">
+        x:Class="YouthClubApp.Views.BadShooterView" Loaded="UserControlOnLoaded">
     <UserControl.Resources>
         <helpers:RelativeConverter x:Key="RelativeConverter" />
         <BitmapImage x:Key="BackGround" UriSource="background.jpg" />

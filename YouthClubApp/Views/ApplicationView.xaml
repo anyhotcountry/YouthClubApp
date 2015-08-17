@@ -7,8 +7,8 @@
         Title="Bad Shooter" ResizeMode="CanResizeWithGrip" WindowState="Maximized">
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:TargetGameViewModel}">
-            <local:TargetGameView />
+        <DataTemplate DataType="{x:Type vm:BadShooterViewModel}">
+            <local:BadShooterView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:ScoresViewModel}">
             <local:ScoresView />

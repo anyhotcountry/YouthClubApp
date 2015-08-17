@@ -75,7 +75,7 @@
     <Compile Include="Helpers\RelativeConverter.cs" />
     <Compile Include="ViewModels\IPageViewModel.cs" />
     <Compile Include="ViewModels\CrossHairViewModel.cs" />
-    <Compile Include="ViewModels\TargetGameViewModel.cs" />
+    <Compile Include="ViewModels\BadShooterViewModel.cs" />
     <Compile Include="ViewModels\ShotViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="Views\ApplicationView.xaml">
@@ -86,7 +86,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TargetGameView.xaml">
+    <Page Include="Views\BadShooterView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,8 +97,8 @@
     <Compile Include="Views\ScoresView.xaml.cs">
       <DependentUpon>ScoresView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TargetGameView.xaml.cs">
-      <DependentUpon>TargetGameView.xaml</DependentUpon>
+    <Compile Include="Views\BadShooterView.xaml.cs">
+      <DependentUpon>BadShooterView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
