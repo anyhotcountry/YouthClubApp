@@ -27,12 +27,12 @@ namespace YouthClubApp.ViewModels
                 new PlayerViewModel("Mum", Key.Space, Colors.AliceBlue)
             };
             // Add available pages
-            PageViewModels.Add(new BadShooterViewModel("Bad Shooter", 800, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
+            PageViewModels.Add(new BadShooterViewModel("Bad Shooter", 90, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
             PageViewModels.Add(new ScoresViewModel(PageViewModels[0].Name, players));
-            PageViewModels.Add(new BadShooterViewModel("Bad Shooter Far", 400, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
+            PageViewModels.Add(new BadShooterViewModel("Bad Shooter Far", 60, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
             PageViewModels.Add(new ScoresViewModel(PageViewModels[2].Name, players));
             PageViewModels.Add(new ScoresViewModel(players));
-            PageViewModels.Add(new BadShooterViewModel("Bad Shooter, Seriously!", 200, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
+            PageViewModels.Add(new BadShooterViewModel("Bad Shooter, Seriously!", 30, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
             PageViewModels.Add(new ScoresViewModel(PageViewModels[5].Name, players));
             PageViewModels.Add(new ScoresViewModel(players));
 

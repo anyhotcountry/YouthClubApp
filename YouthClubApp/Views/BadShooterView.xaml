@@ -14,9 +14,20 @@
         <Grid.Background>
             <ImageBrush ImageSource="{StaticResource BackGround}" Stretch="UniformToFill" />
         </Grid.Background>
-        <Ellipse Name="OuterEllipse" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding Path=Radius}"
-                 Height="{Binding  Path=Radius}"
-                 Fill="Blue" Stroke="Blue" StrokeThickness="0" />
+        <Ellipse Name="OuterEllipse" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="Blue" Stroke="Blue" StrokeThickness="0" >
+            <Ellipse.Height>
+                <MultiBinding Converter="{StaticResource RelativeConverter}">
+                    <Binding Path="Radius" />
+                    <Binding Path="ActualHeight" ElementName="ParentGrid" />
+                </MultiBinding>
+            </Ellipse.Height>
+            <Ellipse.Width>
+                <MultiBinding Converter="{StaticResource RelativeConverter}">
+                    <Binding Path="Radius" />
+                    <Binding Path="ActualHeight" ElementName="ParentGrid" />
+                </MultiBinding>
+            </Ellipse.Width>
+        </Ellipse>
         <Ellipse Name="InnerEllipse" HorizontalAlignment="Center" VerticalAlignment="Center"
                  Width="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.6'}"
                  Height="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.6'}"
