@@ -9,7 +9,7 @@ using YouthClubApp.Services;
 
 namespace YouthClubApp.ViewModels
 {
-    public class TargetGameViewModel : ViewModelBase, IPageViewModel
+    public class BadShooterViewModel : ViewModelBase, IPageViewModel
     {
         private readonly DispatcherTimer animationTimer;
         private readonly DispatcherTimer gameTimer;
@@ -22,7 +22,7 @@ namespace YouthClubApp.ViewModels
 
         public event EventHandler Close;
 
-        public TargetGameViewModel(string name, double radius, PlayerViewModel[] players, ISoundEffect audioPlayer, IGunAimPhysics gunAimPhysics)
+        public BadShooterViewModel(string name, double radius, PlayerViewModel[] players, ISoundEffect audioPlayer, IGunAimPhysics gunAimPhysics)
         {
             Name = name;
             Radius = radius;
@@ -85,7 +85,6 @@ namespace YouthClubApp.ViewModels
             scores[key] += gunAimPhysics.GetScore(hitType);
             var shot = new ShotViewModel { X = CrossHair.X, Y = CrossHair.Y };
             Shots.Add(shot);
-
         }
 
         private void DispatcherTimerOnTick(object sender, EventArgs e)

@@ -6,11 +6,11 @@ using YouthClubApp.ViewModels;
 
 namespace YouthClubApp.Views
 {
-    public partial class TargetGameView : UserControl
+    public partial class BadShooterView : UserControl
     {
         private Window window;
 
-        public TargetGameView()
+        public BadShooterView()
         {
             InitializeComponent();
             Unloaded += (o, e) => window.KeyDown -= OnKeyDown;
@@ -20,13 +20,13 @@ namespace YouthClubApp.Views
         {
             window = Window.GetWindow(this);
             window.KeyDown += OnKeyDown;
-            var vm = DataContext as TargetGameViewModel;
+            var vm = DataContext as BadShooterViewModel;
             vm.Start();
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            var vm = DataContext as TargetGameViewModel;
+            var vm = DataContext as BadShooterViewModel;
             Point pt = CrossHairCanvas.TransformToAncestor(ParentGrid)
                                       .Transform(new Point(CrossHairCanvas.ActualWidth, CrossHairCanvas.ActualHeight));
             var rx = pt.X - 0.5 * ParentGrid.ActualWidth;

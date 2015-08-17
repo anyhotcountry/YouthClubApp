@@ -1,0 +1,90 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:YouthClubApp.ViewModels"
+        xmlns:helpers="clr-namespace:YouthClubApp.Helpers"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        x:Class="YouthClubApp.Views.BadShooterView" Loaded="UserControlOnLoaded">
+    <UserControl.Resources>
+        <helpers:RelativeConverter x:Key="RelativeConverter" />
+        <BitmapImage x:Key="BackGround" UriSource="background.jpg" />
+        <BitmapImage x:Key="BulletHole" UriSource="bullet_hole.png" />
+    </UserControl.Resources>
+    <Grid Name="ParentGrid" DataContext="{Binding}">
+        <Grid.Background>
+            <ImageBrush ImageSource="{StaticResource BackGround}" Stretch="UniformToFill" />
+        </Grid.Background>
+        <Ellipse Name="OuterEllipse" HorizontalAlignment="Center" VerticalAlignment="Center" Width="{Binding Path=Radius}"
+                 Height="{Binding  Path=Radius}"
+                 Fill="Blue" Stroke="Blue" StrokeThickness="0" />
+        <Ellipse Name="InnerEllipse" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 Width="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.6'}"
+                 Height="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.6'}"
+                 Fill="Green" Stroke="Black" StrokeThickness="0" />
+        <Ellipse Name="BullsEye" HorizontalAlignment="Center" VerticalAlignment="Center"
+                 Width="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.25'}"
+                 Height="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.25'}"
+                 Fill="Red" Stroke="Black" StrokeThickness="0" />
+        <Label HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="96" Content="{Binding Path=Seconds}" />
+        <Canvas HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DataContext="{Binding}">
+            <Canvas x:Name="CrossHairCanvas" Width="200" Height="200">
+                <Viewbox x:Name="CrossHairs" Width="200" Height="200" Canvas.Left="0" Canvas.Top="0">
+                    <Canvas Width="38" Height="38">
+                        <Path Width="38" Height="38" Canvas.Left="19" Canvas.Top="19" Stretch="Fill" Fill="#FF000000" Data="F1 M 22.2448,39.5833L 19,39.5833L 19,36.4167L 22.2448,36.4167C 22.9875,28.9363 28.9363,22.9875 36.4167,22.2448L 36.4167,19L 39.5833,19L 39.5833,22.2448C 47.0637,22.9875 53.0125,28.9363 53.7552,36.4167L 57,36.4167L 57,39.5833L 53.7552,39.5833C 53.0125,47.0637 47.0637,53.0125 39.5833,53.7552L 39.5833,57L 36.4167,57L 36.4167,53.7552C 28.9363,53.0125 22.9875,47.0637 22.2448,39.5833 Z M 25.4313,36.4167L 28.5,36.4167L 28.5,39.5833L 25.4313,39.5833C 26.1458,45.313 30.687,49.8542 36.4167,50.5687L 36.4167,47.5L 39.5833,47.5L 39.5833,50.5687C 45.313,49.8542 49.8542,45.313 50.5686,39.5833L 47.5,39.5833L 47.5,36.4167L 50.5686,36.4167C 49.8542,30.687 45.313,26.1458 39.5833,25.4314L 39.5833,28.5L 36.4167,28.5L 36.4167,25.4314C 30.687,26.1458 26.1458,30.687 25.4313,36.4167 Z " />
+                    </Canvas>
+                </Viewbox>
+                <Canvas.Left>
+                    <MultiBinding Converter="{StaticResource RelativeConverter}">
+                        <Binding Path="CrossHair.X" />
+                        <Binding Path="ActualWidth" ElementName="ParentGrid" />
+                        <Binding Path="ActualWidth" ElementName="CrossHairCanvas" />
+                    </MultiBinding>
+                </Canvas.Left>
+                <Canvas.Top>
+                    <MultiBinding Converter="{StaticResource RelativeConverter}">
+                        <Binding Path="CrossHair.Y" />
+                        <Binding Path="ActualHeight" ElementName="ParentGrid" />
+                        <Binding Path="ActualHeight" ElementName="CrossHairCanvas" />
+                    </MultiBinding>
+                </Canvas.Top>
+            </Canvas>
+        </Canvas>
+        <ItemsControl ItemsSource="{Binding Path=Shots}"
+                      x:Name="itemsControl">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{StaticResource BulletHole}" Width="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.08'}" Height="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='0.08'}">
+                        <Image.RenderTransform>
+                            <TranslateTransform X="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='-0.04'}" Y="{Binding ActualHeight, ElementName=OuterEllipse, Converter={helpers:PercentageConverter}, ConverterParameter='-0.04'}" />
+                        </Image.RenderTransform>
+                    </Image>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource RelativeConverter}">
+                                <Binding Path="X" />
+                                <Binding Path="ActualWidth" ElementName="ParentGrid" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Canvas.Top">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource RelativeConverter}">
+                                <Binding Path="Y" />
+                                <Binding Path="ActualHeight" ElementName="ParentGrid" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+    </Grid>
+</UserControl>

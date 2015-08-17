@@ -4,11 +4,11 @@
         xmlns:local="clr-namespace:YouthClubApp.Views"
         xmlns:vm="clr-namespace:YouthClubApp.ViewModels"
         WindowStartupLocation="CenterScreen"
-        Title="Bad Shooter" ResizeMode="NoResize" WindowState="Maximized">
+        Title="Bad Shooter" ResizeMode="CanResizeWithGrip" WindowState="Maximized">
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vm:TargetGameViewModel}">
-            <local:TargetGameView />
+        <DataTemplate DataType="{x:Type vm:BadShooterViewModel}">
+            <local:BadShooterView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:ScoresViewModel}">
             <local:ScoresView />
