@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace YouthClubApp.ViewModels
+﻿namespace YouthClubApp.ViewModels
 {
-    public class CountdownViewModel
+    public abstract class CountdownViewModel : ViewModelBase
     {
     }
 }
