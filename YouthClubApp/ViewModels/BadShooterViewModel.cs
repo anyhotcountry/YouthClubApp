@@ -9,7 +9,7 @@ using YouthClubApp.Services;
 
 namespace YouthClubApp.ViewModels
 {
-    public class BadShooterViewModel : ViewModelBase, IPageViewModel
+    public class BadShooterViewModel : CountdownViewModel, IPageViewModel
     {
         private readonly DispatcherTimer animationTimer;
         private readonly DispatcherTimer gameTimer;
