@@ -6,9 +6,8 @@ namespace YouthClubApp.Helpers
 {
     public class RelayCommand : ICommand
     {
-
-        readonly Action<object> execute;
-        readonly Predicate<object> canExecute;
+        private readonly Action<object> execute;
+        private readonly Predicate<object> canExecute;
 
         public RelayCommand(Action<object> execute)
             : this(execute, null)
@@ -43,6 +42,6 @@ namespace YouthClubApp.Helpers
             execute(parameters);
         }
 
-        #endregion // ICommand Members
+        #endregion ICommand Members
     }
 }

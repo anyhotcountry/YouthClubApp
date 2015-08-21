@@ -7,7 +7,7 @@ namespace YouthClubApp.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
-        bool? closeWindowFlag;
+        private bool? closeWindowFlag;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

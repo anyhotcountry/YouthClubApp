@@ -39,6 +39,5 @@ namespace YouthClubApp.ViewModels
             int score = scores.Values.Sum();
             return score;
         }
-
     }
 }

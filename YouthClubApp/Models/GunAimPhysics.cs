@@ -13,6 +13,24 @@ namespace YouthClubApp.Models
             rand = new Random();
         }
 
+        public int GetScore(HitTypes hitType)
+        {
+            switch (hitType)
+            {
+                case HitTypes.Outer:
+                    return 10;
+
+                case HitTypes.Inner:
+                    return 25;
+
+                case HitTypes.BullsEye:
+                    return 50;
+
+                default:
+                    return 0;
+            }
+        }
+
         public void Jerk(double x, double y)
         {
             vx += x;
@@ -35,24 +53,6 @@ namespace YouthClubApp.Models
             vy = y == 0 ? 0.5 : vy;
             vy = y == 100 ? -0.5 : vy;
             return Math.Min(Math.Max(0, vy + y), 100);
-        }
-
-        public int GetScore(HitTypes hitType)
-        {
-            switch (hitType)
-            {
-                case HitTypes.Outer:
-                    return 10;
-
-                case HitTypes.Inner:
-                    return 25;
-
-                case HitTypes.BullsEye:
-                    return 50;
-
-                default:
-                    return 0;
-            }
         }
     }
 }

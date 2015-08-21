@@ -16,14 +16,6 @@ namespace YouthClubApp.Views
             Unloaded += (o, e) => window.KeyDown -= OnKeyDown;
         }
 
-        private void UserControlOnLoaded(object sender, RoutedEventArgs e)
-        {
-            window = Window.GetWindow(this);
-            window.KeyDown += OnKeyDown;
-            var vm = DataContext as BadShooterViewModel;
-            vm.Start();
-        }
-
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             var vm = DataContext as BadShooterViewModel;
@@ -50,6 +42,14 @@ namespace YouthClubApp.Views
             }
 
             vm.OnShot(e.Key, hitType);
+        }
+
+        private void UserControlOnLoaded(object sender, RoutedEventArgs e)
+        {
+            window = Window.GetWindow(this);
+            window.KeyDown += OnKeyDown;
+            var vm = DataContext as BadShooterViewModel;
+            vm.Start();
         }
     }
 }

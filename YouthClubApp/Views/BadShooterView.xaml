@@ -123,5 +123,7 @@
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
+        <Label x:Name="countdownLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="200" FontWeight="Bold"
+               Content="{Binding Path=CountDownText}" />
     </Grid>
 </UserControl>

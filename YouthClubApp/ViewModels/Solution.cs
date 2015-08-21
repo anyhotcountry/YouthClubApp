@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace YouthClubApp.ViewModels
             "GO!"
         };
 
-        private string countDownText = countdowns[0];
+        private string countdownContent = countdowns[0];
 
         public BadShooterViewModel(string name, double radius, PlayerViewModel[] players, ISoundEffect audioPlayer, IGunAimPhysics gunAimPhysics)
         {
@@ -53,13 +53,13 @@ namespace YouthClubApp.ViewModels
             count++;
             if (count < countdowns.Count)
             {
-                CountDownText = countdowns[count];
+                CountdownTimer = countdowns[count];
             }
             else
             {
                 gameTimer.Tick -= CountDown;
                 gameTimer.Tick += GameTimerOnTick;
-                CountDownText = string.Empty;
+                CountdownTimer = string.Empty;
                 animationTimer.Start();
             }
         }
@@ -72,19 +72,19 @@ namespace YouthClubApp.ViewModels
 
         public double Radius { get; }
 
-        public string CountDownText
+        public string CountdownTimer
         {
             get
             {
-                return countDownText;
+                return countdownContent;
             }
 
             set
             {
-                if (countDownText != value)
+                if (countdownContent != value)
                 {
-                    countDownText = value;
-                    OnPropertyChanged(nameof(CountDownText));
+                    countdownContent = value;
+                    OnPropertyChanged(nameof(CountdownTimer));
                 }
             }
         }

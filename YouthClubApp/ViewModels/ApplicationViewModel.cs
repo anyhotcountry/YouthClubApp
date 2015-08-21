@@ -61,17 +61,6 @@ namespace YouthClubApp.ViewModels
             }
         }
 
-        public List<IPageViewModel> PageViewModels
-        {
-            get
-            {
-                if (pageViewModels == null)
-                    pageViewModels = new List<IPageViewModel>();
-
-                return pageViewModels;
-            }
-        }
-
         public IPageViewModel CurrentPageViewModel
         {
             get
@@ -85,6 +74,17 @@ namespace YouthClubApp.ViewModels
                     currentPageViewModel = value;
                     OnPropertyChanged(nameof(CurrentPageViewModel));
                 }
+            }
+        }
+
+        public List<IPageViewModel> PageViewModels
+        {
+            get
+            {
+                if (pageViewModels == null)
+                    pageViewModels = new List<IPageViewModel>();
+
+                return pageViewModels;
             }
         }
 
