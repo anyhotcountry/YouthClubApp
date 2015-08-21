@@ -15,7 +15,7 @@ namespace YouthClubApp.ViewModels
         private readonly ISoundEffect audioPlayer;
         private readonly DispatcherTimer gameTimer;
         private readonly IGunAimPhysics gunAimPhysics;
-        private readonly IDictionary<Key, int> presses;
+        private IDictionary<Key, int> presses;
         private readonly Dictionary<Key, int> scores;
         private PlayerViewModel[] players;
         private int seconds = 30;
@@ -40,7 +40,6 @@ namespace YouthClubApp.ViewModels
             this.players = players;
             this.audioPlayer = audioPlayer;
             this.gunAimPhysics = gunAimPhysics;
-            presses = players.ToDictionary(p => p.Key, p => 0);
             scores = players.ToDictionary(p => p.Key, p => 0);
             animationTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(10) };
             animationTimer.Tick += DispatcherTimerOnTick;
@@ -60,6 +59,7 @@ namespace YouthClubApp.ViewModels
                 gameTimer.Tick -= CountDown;
                 gameTimer.Tick += GameTimerOnTick;
                 CountDownText = string.Empty;
+                presses = players.ToDictionary(p => p.Key, p => p.AllowedShots);
                 animationTimer.Start();
             }
         }
@@ -110,13 +110,13 @@ namespace YouthClubApp.ViewModels
 
         public void OnShot(Key key, HitTypes hitType)
         {
-            if (!presses.ContainsKey(key) || presses[key]++ >= 5)
+            if (presses == null || !presses.ContainsKey(key) || presses[key]-- <= 0)
             {
                 return;
             }
 
             audioPlayer.Play();
-            gunAimPhysics.Jerk(0, -2);
+            gunAimPhysics.Jerk(0, -0.5);
             if (hitType == HitTypes.Miss)
             {
                 return;

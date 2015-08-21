@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace YouthClubApp.ViewModels
 {
@@ -9,18 +8,18 @@ namespace YouthClubApp.ViewModels
     {
         private readonly Dictionary<string, int> scores;
 
-        public PlayerViewModel(string name, Key key, Color colour)
+        public PlayerViewModel(string name, Key key, int allowedShots)
         {
             Name = name;
             Key = key;
-            Colour = colour;
+            AllowedShots = allowedShots;
             scores = new Dictionary<string, int>();
         }
 
         public Key Key { get; }
 
         public string Name { get; }
-        public Color Colour { get; }
+        public int AllowedShots { get; }
 
         public void SetScore(string game, int score)
         {

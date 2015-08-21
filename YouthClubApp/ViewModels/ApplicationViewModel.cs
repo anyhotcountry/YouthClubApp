@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Media;
 using YouthClubApp.Helpers;
 using YouthClubApp.Models;
 using YouthClubApp.Services;
@@ -18,13 +17,13 @@ namespace YouthClubApp.ViewModels
         {
             var players = new[]
             {
-                new PlayerViewModel("Isaac", Key.A, Colors.LightSteelBlue),
-                new PlayerViewModel("Lucas", Key.B, Colors.LightSeaGreen),
-                new PlayerViewModel("Elsabe", Key.C, Colors.LightPink),
-                new PlayerViewModel("Ilana", Key.D, Colors.LightGoldenrodYellow),
-                new PlayerViewModel("Johan", Key.E, Colors.Orange),
-                new PlayerViewModel("Dad", Key.Enter, Colors.AliceBlue),
-                new PlayerViewModel("Mum", Key.Space, Colors.AliceBlue)
+                new PlayerViewModel("Isaac", Key.A, 10),
+                new PlayerViewModel("Lucas", Key.B, 7),
+                new PlayerViewModel("Elsabe", Key.C, 6),
+                new PlayerViewModel("Ilana", Key.D, 5),
+                new PlayerViewModel("Johan", Key.E, 5),
+                new PlayerViewModel("Dad", Key.Enter, 5),
+                new PlayerViewModel("Mum", Key.Space, 5)
             };
             // Add available pages
             PageViewModels.Add(new BadShooterViewModel("Bad Shooter", 90, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
