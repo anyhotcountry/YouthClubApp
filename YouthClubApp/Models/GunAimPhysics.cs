@@ -39,7 +39,7 @@ namespace YouthClubApp.Models
 
         public double NextX(double x)
         {
-            var fx = 0.1 * (rand.NextDouble() - 0.5);
+            var fx = -0.001 * (x - 50) + 0.1 * (rand.NextDouble() - 0.5);
             vx += fx;
             vx = x == 0 ? 0.5 : vx;
             vx = x == 100 ? -0.5 : vx;
@@ -48,7 +48,7 @@ namespace YouthClubApp.Models
 
         public double NextY(double y)
         {
-            var fy = 0.1 * (rand.NextDouble() - 0.5);
+            var fy = -0.001 * (y - 50) * rand.NextDouble() + 0.1 * (rand.NextDouble() - 0.5);
             vy += fy;
             vy = y == 0 ? 0.5 : vy;
             vy = y == 100 ? -0.5 : vy;
