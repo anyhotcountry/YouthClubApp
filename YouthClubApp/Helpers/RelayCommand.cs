@@ -6,8 +6,8 @@ namespace YouthClubApp.Helpers
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action<object> execute;
         private readonly Predicate<object> canExecute;
+        private readonly Action<object> execute;
 
         public RelayCommand(Action<object> execute)
             : this(execute, null)
@@ -17,7 +17,9 @@ namespace YouthClubApp.Helpers
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if (execute == null)
+            {
                 throw new ArgumentNullException("execute");
+            }
 
             this.execute = execute;
             this.canExecute = canExecute;
@@ -25,16 +27,16 @@ namespace YouthClubApp.Helpers
 
         #region ICommand Members
 
-        [DebuggerStepThrough]
-        public bool CanExecute(object parameters)
-        {
-            return canExecute == null ? true : canExecute(parameters);
-        }
-
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
+        }
+
+        [DebuggerStepThrough]
+        public bool CanExecute(object parameters)
+        {
+            return canExecute == null ? true : canExecute(parameters);
         }
 
         public void Execute(object parameters)

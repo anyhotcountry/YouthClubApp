@@ -9,7 +9,7 @@ namespace YouthClubApp.Helpers
         {
             try
             {
-                return ((Double)values[0] * (Double)values[1] * 0.01) - (values.Length > 2 ? (Double)values[2] : 0);
+                return ((double)values[0] * (double)values[1] * 0.01) - (values.Length > 2 ? (double)values[2] : 0);
             }
             catch (Exception)
             {

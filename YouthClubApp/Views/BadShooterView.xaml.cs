@@ -21,9 +21,9 @@ namespace YouthClubApp.Views
             var vm = DataContext as BadShooterViewModel;
             Point pt = CrossHairCanvas.TransformToAncestor(ParentGrid)
                                       .Transform(new Point(CrossHairCanvas.ActualWidth, CrossHairCanvas.ActualHeight));
-            var rx = pt.X - 0.5 * ParentGrid.ActualWidth;
-            var ry = pt.Y - 0.5 * ParentGrid.ActualHeight;
-            var rsquared = rx * rx + ry * ry;
+            var rx = pt.X - (0.5 * ParentGrid.ActualWidth);
+            var ry = pt.Y - (0.5 * ParentGrid.ActualHeight);
+            var rsquared = (rx * rx) + (ry * ry);
             var outerRSquared = 0.25 * OuterEllipse.ActualWidth * OuterEllipse.ActualWidth;
             var innerRSquared = 0.25 * InnerEllipse.ActualWidth * InnerEllipse.ActualWidth;
             var bullseyeRSquared = 0.25 * BullsEye.ActualWidth * BullsEye.ActualWidth;

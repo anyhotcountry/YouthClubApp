@@ -11,16 +11,6 @@ namespace YouthClubApp.ViewModels
 {
     public class BadShooterViewModel : CountdownViewModel, IPageViewModel
     {
-        private readonly DispatcherTimer animationTimer;
-        private readonly ISoundEffect audioPlayer;
-        private readonly DispatcherTimer gameTimer;
-        private readonly IGunAimPhysics gunAimPhysics;
-        private IDictionary<Key, int> presses;
-        private readonly Dictionary<Key, int> scores;
-        private PlayerViewModel[] players;
-        private int seconds = 30;
-        private int count = 0;
-
         private static IList<string> countdowns = new[]
         {
             string.Empty,
@@ -31,7 +21,16 @@ namespace YouthClubApp.ViewModels
             "GO!"
         };
 
+        private readonly DispatcherTimer animationTimer;
+        private readonly ISoundEffect audioPlayer;
+        private readonly DispatcherTimer gameTimer;
+        private readonly IGunAimPhysics gunAimPhysics;
+        private readonly Dictionary<Key, int> scores;
+        private int count = 0;
         private string countDownText = countdowns[0];
+        private PlayerViewModel[] players;
+        private IDictionary<Key, int> presses;
+        private int seconds = 30;
 
         public BadShooterViewModel(string name, double radius, PlayerViewModel[] players, ISoundEffect audioPlayer, IGunAimPhysics gunAimPhysics)
         {
@@ -47,30 +46,7 @@ namespace YouthClubApp.ViewModels
             gameTimer.Tick += CountDown;
         }
 
-        private void CountDown(object sender, EventArgs e)
-        {
-            count++;
-            if (count < countdowns.Count)
-            {
-                CountDownText = countdowns[count];
-            }
-            else
-            {
-                gameTimer.Tick -= CountDown;
-                gameTimer.Tick += GameTimerOnTick;
-                CountDownText = string.Empty;
-                presses = players.ToDictionary(p => p.Key, p => p.AllowedShots);
-                animationTimer.Start();
-            }
-        }
-
         public event EventHandler Close;
-
-        public CrossHairViewModel CrossHair { get; } = new CrossHairViewModel { X = 50, Y = 100 };
-
-        public string Name { get; }
-
-        public double Radius { get; }
 
         public string CountDownText
         {
@@ -88,6 +64,12 @@ namespace YouthClubApp.ViewModels
                 }
             }
         }
+
+        public CrossHairViewModel CrossHair { get; } = new CrossHairViewModel { X = 50, Y = 100 };
+
+        public string Name { get; }
+
+        public double Radius { get; }
 
         public int Seconds
         {
@@ -130,6 +112,23 @@ namespace YouthClubApp.ViewModels
         public void Start()
         {
             gameTimer.Start();
+        }
+
+        private void CountDown(object sender, EventArgs e)
+        {
+            count++;
+            if (count < countdowns.Count)
+            {
+                CountDownText = countdowns[count];
+            }
+            else
+            {
+                gameTimer.Tick -= CountDown;
+                gameTimer.Tick += GameTimerOnTick;
+                CountDownText = string.Empty;
+                presses = players.ToDictionary(p => p.Key, p => p.AllowedShots);
+                animationTimer.Start();
+            }
         }
 
         private void DispatcherTimerOnTick(object sender, EventArgs e)

@@ -33,16 +33,15 @@ namespace YouthClubApp.ViewModels
             });
         }
 
+        public event EventHandler Close;
+
+        public ICommand ButtonCommand { get; }
         public string Name { get; }
 
         public ObservableCollection<ScoreViewModel> Scores
         {
             get { return scores.Value; }
         }
-
-        public event EventHandler Close;
-
-        public ICommand ButtonCommand { get; }
 
         private void OnClose(object parameter)
         {

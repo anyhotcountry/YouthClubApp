@@ -16,15 +16,11 @@ namespace YouthClubApp.ViewModels
             scores = new Dictionary<string, int>();
         }
 
+        public int AllowedShots { get; }
+
         public Key Key { get; }
 
         public string Name { get; }
-        public int AllowedShots { get; }
-
-        public void SetScore(string game, int score)
-        {
-            scores[game] = score;
-        }
 
         public int GetScore(string game)
         {
@@ -37,6 +33,11 @@ namespace YouthClubApp.ViewModels
         {
             int score = scores.Values.Sum();
             return score;
+        }
+
+        public void SetScore(string game, int score)
+        {
+            scores[game] = score;
         }
     }
 }

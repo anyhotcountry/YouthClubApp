@@ -2,12 +2,12 @@
 {
     public interface IGunAimPhysics
     {
-        double NextX(double x);
-
-        double NextY(double y);
+        int GetScore(HitTypes hitType);
 
         void Jerk(double x, double y);
 
-        int GetScore(HitTypes hitType);
+        double NextX(double x);
+
+        double NextY(double y);
     }
 }

@@ -25,7 +25,7 @@ namespace YouthClubApp.ViewModels
                 new PlayerViewModel("Dad", Key.Enter, 5),
                 new PlayerViewModel("Mum", Key.Space, 5)
             };
-            // Add available pages
+            //// Add available pages
             PageViewModels.Add(new BadShooterViewModel("Bad Shooter", 90, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
             PageViewModels.Add(new ScoresViewModel(PageViewModels[0].Name, players));
             PageViewModels.Add(new BadShooterViewModel("Bad Shooter Far", 60, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
@@ -66,6 +66,7 @@ namespace YouthClubApp.ViewModels
             {
                 return currentPageViewModel;
             }
+
             set
             {
                 if (currentPageViewModel != value)
@@ -81,7 +82,9 @@ namespace YouthClubApp.ViewModels
             get
             {
                 if (pageViewModels == null)
+                {
                     pageViewModels = new List<IPageViewModel>();
+                }
 
                 return pageViewModels;
             }
@@ -90,7 +93,9 @@ namespace YouthClubApp.ViewModels
         private void ChangeViewModel(IPageViewModel viewModel)
         {
             if (!PageViewModels.Contains(viewModel))
+            {
                 PageViewModels.Add(viewModel);
+            }
 
             CurrentPageViewModel = PageViewModels
                 .FirstOrDefault(vm => vm == viewModel);
