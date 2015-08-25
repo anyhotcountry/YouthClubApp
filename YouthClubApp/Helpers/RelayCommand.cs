@@ -18,7 +18,7 @@ namespace YouthClubApp.Helpers
         {
             if (execute == null)
             {
-                throw new ArgumentNullException("execute");
+                throw new ArgumentNullException(nameof(execute));
             }
 
             this.execute = execute;
@@ -36,7 +36,7 @@ namespace YouthClubApp.Helpers
         [DebuggerStepThrough]
         public bool CanExecute(object parameters)
         {
-            return canExecute == null ? true : canExecute(parameters);
+            return canExecute?.Invoke(parameters) ?? true;
         }
 
         public void Execute(object parameters)

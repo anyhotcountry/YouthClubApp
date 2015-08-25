@@ -2,8 +2,8 @@
 {
     public class TestPhysics : IGunAimPhysics
     {
-        private double x;
-        private double y;
+        private readonly double x;
+        private readonly double y;
 
         public TestPhysics(double x, double y)
         {

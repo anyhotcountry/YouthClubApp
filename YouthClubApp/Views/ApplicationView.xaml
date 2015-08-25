@@ -13,6 +13,9 @@
         <DataTemplate DataType="{x:Type vm:ScoresViewModel}">
             <local:ScoresView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PlayersViewModel}">
+            <local:PlayersView />
+        </DataTemplate>
     </Window.Resources>
     <ContentControl Content="{Binding CurrentPageViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 </Window>

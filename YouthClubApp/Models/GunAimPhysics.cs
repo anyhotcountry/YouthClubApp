@@ -4,6 +4,7 @@ namespace YouthClubApp.Models
 {
     public class GunAimPhysics : IGunAimPhysics
     {
+        private const double Tolerance = 0;
         private readonly Random rand;
         private double vx;
         private double vy;
@@ -50,8 +51,8 @@ namespace YouthClubApp.Models
         {
             var fx = (-SpringConstant * (x - 50)) - (DampingConstant * vx * Math.Abs(vx)) + (RandomConstant * (rand.NextDouble() - 0.5));
             vx += fx;
-            vx = x == 0 ? 0.5 : vx;
-            vx = x == 100 ? -0.5 : vx;
+            vx = Math.Abs(x) < Tolerance ? 0.5 : vx;
+            vx = Math.Abs(x - 100) < Tolerance ? -0.5 : vx;
             return Math.Min(Math.Max(0, vx + x), 100);
         }
 
@@ -59,8 +60,8 @@ namespace YouthClubApp.Models
         {
             var fy = (-SpringConstant * (y - 50)) - (DampingConstant * vy * Math.Abs(vy)) + (RandomConstant * (rand.NextDouble() - 0.5));
             vy += fy;
-            vy = y == 0 ? 0.5 : vy;
-            vy = y == 100 ? -0.5 : vy;
+            vy = Math.Abs(y) < Tolerance ? 0.5 : vy;
+            vy = Math.Abs(y - 100) < Tolerance ? -0.5 : vy;
             return Math.Min(Math.Max(0, vy + y), 100);
         }
     }

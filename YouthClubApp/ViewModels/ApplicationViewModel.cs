@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using YouthClubApp.Helpers;
@@ -15,7 +16,7 @@ namespace YouthClubApp.ViewModels
 
         public ApplicationViewModel()
         {
-            var players = new[]
+            var players = new ObservableCollection<PlayerViewModel>
             {
                 new PlayerViewModel("Isaac", Key.A, 10),
                 new PlayerViewModel("Lucas", Key.B, 7),
@@ -26,6 +27,7 @@ namespace YouthClubApp.ViewModels
                 new PlayerViewModel("Mum", Key.Space, 5)
             };
             //// Add available pages
+            PageViewModels.Add(new PlayersViewModel(players));
             PageViewModels.Add(new BadShooterViewModel("Bad Shooter", 90, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
             PageViewModels.Add(new ScoresViewModel(PageViewModels[0].Name, players));
             PageViewModels.Add(new BadShooterViewModel("Bad Shooter Far", 60, players, new SoundEffect("Loud_Gunshot.wav"), new GunAimPhysics()));
@@ -35,7 +37,7 @@ namespace YouthClubApp.ViewModels
             PageViewModels.Add(new ScoresViewModel(PageViewModels[5].Name, players));
             PageViewModels.Add(new ScoresViewModel(players));
 
-            for (int i = 0; i < PageViewModels.Count - 1; i++)
+            for (var i = 0; i < PageViewModels.Count - 1; i++)
             {
                 var nextIndex = i + 1;
                 PageViewModels[i].Close += (o, e) => ChangeViewModel(PageViewModels[nextIndex]);
@@ -49,14 +51,9 @@ namespace YouthClubApp.ViewModels
         {
             get
             {
-                if (changePageCommand == null)
-                {
-                    changePageCommand = new RelayCommand(
-                        p => ChangeViewModel((IPageViewModel)p),
-                        p => p is IPageViewModel);
-                }
-
-                return changePageCommand;
+                return changePageCommand ?? (changePageCommand = new RelayCommand(
+                    p => ChangeViewModel((IPageViewModel)p),
+                    p => p is IPageViewModel));
             }
         }
 
@@ -69,26 +66,17 @@ namespace YouthClubApp.ViewModels
 
             set
             {
-                if (currentPageViewModel != value)
+                if (currentPageViewModel == value)
                 {
-                    currentPageViewModel = value;
-                    OnPropertyChanged(nameof(CurrentPageViewModel));
+                    return;
                 }
+
+                currentPageViewModel = value;
+                OnPropertyChanged(nameof(CurrentPageViewModel));
             }
         }
 
-        public List<IPageViewModel> PageViewModels
-        {
-            get
-            {
-                if (pageViewModels == null)
-                {
-                    pageViewModels = new List<IPageViewModel>();
-                }
-
-                return pageViewModels;
-            }
-        }
+        public List<IPageViewModel> PageViewModels => pageViewModels ?? (pageViewModels = new List<IPageViewModel>());
 
         private void ChangeViewModel(IPageViewModel viewModel)
         {

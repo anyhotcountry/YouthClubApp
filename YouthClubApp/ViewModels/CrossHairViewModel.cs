@@ -1,7 +1,10 @@
-﻿namespace YouthClubApp.ViewModels
+﻿using System;
+
+namespace YouthClubApp.ViewModels
 {
     public class CrossHairViewModel : ViewModelBase
     {
+        private const double Tolerance = 0;
         private double x;
         private double y;
 
@@ -14,11 +17,13 @@
 
             set
             {
-                if (x != value)
+                if (!(Math.Abs(x - value) > Tolerance))
                 {
-                    x = value;
-                    OnPropertyChanged(nameof(X));
+                    return;
                 }
+
+                x = value;
+                OnPropertyChanged(nameof(X));
             }
         }
 
@@ -31,11 +36,13 @@
 
             set
             {
-                if (y != value)
+                if (!(Math.Abs(y - value) > Tolerance))
                 {
-                    y = value;
-                    OnPropertyChanged(nameof(Y));
+                    return;
                 }
+
+                y = value;
+                OnPropertyChanged(nameof(Y));
             }
         }
     }

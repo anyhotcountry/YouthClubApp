@@ -31,7 +31,7 @@ namespace YouthClubApp.ViewModels
 
         public int GetScore()
         {
-            int score = scores.Values.Sum();
+            var score = scores.Values.Sum();
             return score;
         }
 

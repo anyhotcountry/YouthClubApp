@@ -11,7 +11,7 @@ namespace YouthClubApp.ViewModels
 {
     public class BadShooterViewModel : CountdownViewModel, IPageViewModel
     {
-        private static IList<string> countdowns = new[]
+        private static readonly IList<string> Countdowns = new[]
         {
             string.Empty,
             "Get Ready!",
@@ -26,13 +26,13 @@ namespace YouthClubApp.ViewModels
         private readonly DispatcherTimer gameTimer;
         private readonly IGunAimPhysics gunAimPhysics;
         private readonly Dictionary<Key, int> scores;
-        private int count = 0;
-        private string countDownText = countdowns[0];
-        private PlayerViewModel[] players;
+        private int count;
+        private string countDownText = Countdowns[0];
+        private readonly IList<PlayerViewModel> players;
         private IDictionary<Key, int> presses;
         private int seconds = 30;
 
-        public BadShooterViewModel(string name, double radius, PlayerViewModel[] players, ISoundEffect audioPlayer, IGunAimPhysics gunAimPhysics)
+        public BadShooterViewModel(string name, double radius, IList<PlayerViewModel> players, ISoundEffect audioPlayer, IGunAimPhysics gunAimPhysics)
         {
             Name = name;
             Radius = radius;
@@ -117,9 +117,9 @@ namespace YouthClubApp.ViewModels
         private void CountDown(object sender, EventArgs e)
         {
             count++;
-            if (count < countdowns.Count)
+            if (count < Countdowns.Count)
             {
-                CountDownText = countdowns[count];
+                CountDownText = Countdowns[count];
             }
             else
             {

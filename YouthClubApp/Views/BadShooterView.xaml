@@ -1,7 +1,6 @@
 ﻿<UserControl
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="clr-namespace:YouthClubApp.ViewModels"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:helpers="clr-namespace:YouthClubApp.Helpers"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
@@ -87,7 +86,7 @@
             </Canvas>
         </Canvas>
         <ItemsControl ItemsSource="{Binding Path=Shots}"
-                      x:Name="itemsControl">
+                      x:Name="ItemsControl">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas />
@@ -123,7 +122,7 @@
                 </Style>
             </ItemsControl.ItemContainerStyle>
         </ItemsControl>
-        <Label x:Name="countdownLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="200" FontWeight="Bold"
+        <Label x:Name="CountdownLabel" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="200" FontWeight="Bold"
                Content="{Binding Path=CountDownText}" />
     </Grid>
 </UserControl>

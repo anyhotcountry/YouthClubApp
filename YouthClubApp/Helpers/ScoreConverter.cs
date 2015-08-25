@@ -12,7 +12,7 @@ namespace YouthClubApp.Helpers
             var vm = value as PlayerViewModel;
             var game = (string)parameter;
 
-            var result = vm.GetScore(game);
+            var result = vm?.GetScore(game);
             return result;
         }
 

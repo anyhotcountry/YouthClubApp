@@ -1,11 +1,6 @@
-﻿using System.Windows;
-
-namespace YouthClubApp.Views
+﻿namespace YouthClubApp.Views
 {
-    /// <summary>
-    /// Interaction logic for ApplicationView.xaml
-    /// </summary>
-    public partial class ApplicationView : Window
+    public partial class ApplicationView
     {
         public ApplicationView()
         {

@@ -1,12 +1,11 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using YouthClubApp.Models;
 using YouthClubApp.ViewModels;
 
 namespace YouthClubApp.Views
 {
-    public partial class BadShooterView : UserControl
+    public partial class BadShooterView
     {
         private Window window;
 
@@ -19,7 +18,7 @@ namespace YouthClubApp.Views
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             var vm = DataContext as BadShooterViewModel;
-            Point pt = CrossHairCanvas.TransformToAncestor(ParentGrid)
+            var pt = CrossHairCanvas.TransformToAncestor(ParentGrid)
                                       .Transform(new Point(CrossHairCanvas.ActualWidth, CrossHairCanvas.ActualHeight));
             var rx = pt.X - (0.5 * ParentGrid.ActualWidth);
             var ry = pt.Y - (0.5 * ParentGrid.ActualHeight);
@@ -41,15 +40,19 @@ namespace YouthClubApp.Views
                 hitType = HitTypes.Outer;
             }
 
-            vm.OnShot(e.Key, hitType);
+            vm?.OnShot(e.Key, hitType);
         }
 
         private void UserControlOnLoaded(object sender, RoutedEventArgs e)
         {
             window = Window.GetWindow(this);
-            window.KeyDown += OnKeyDown;
+            if (window != null)
+            {
+                window.KeyDown += OnKeyDown;
+            }
+
             var vm = DataContext as BadShooterViewModel;
-            vm.Start();
+            vm?.Start();
         }
     }
 }

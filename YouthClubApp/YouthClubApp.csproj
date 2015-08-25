@@ -73,6 +73,7 @@
     <Compile Include="Services\SoundEffect.cs" />
     <Compile Include="Services\ISoundEffect.cs" />
     <Compile Include="ViewModels\CountdownViewModel.cs" />
+    <Compile Include="ViewModels\PlayersViewModel.cs" />
     <Compile Include="ViewModels\PlayerViewModel.cs" />
     <Compile Include="ViewModels\ScoresViewModel.cs" />
     <Compile Include="ViewModels\ScoreViewModel.cs" />
@@ -92,6 +93,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\PlayersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ScoresView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +108,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\PlayersView.xaml.cs">
+      <DependentUpon>PlayersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ScoresView.xaml.cs">
       <DependentUpon>ScoresView.xaml</DependentUpon>

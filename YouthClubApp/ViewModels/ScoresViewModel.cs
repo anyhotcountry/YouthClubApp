@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -15,18 +16,18 @@ namespace YouthClubApp.ViewModels
             ButtonCommand = new RelayCommand(OnClose);
         }
 
-        public ScoresViewModel(PlayerViewModel[] players) : this()
+        public ScoresViewModel(IList<PlayerViewModel> players) : this()
         {
-            this.Name = "Overall Scores";
+            Name = "Overall Scores";
             scores = new Lazy<ObservableCollection<ScoreViewModel>>(() =>
             {
                 return new ObservableCollection<ScoreViewModel>(players.Select(p => new ScoreViewModel(p.Name, p.GetScore())).OrderByDescending(s => s.Score));
             });
         }
 
-        public ScoresViewModel(string gameName, PlayerViewModel[] players) : this(players)
+        public ScoresViewModel(string gameName, IList<PlayerViewModel> players) : this(players)
         {
-            this.Name = gameName + " Scores";
+            Name = gameName + " Scores";
             scores = new Lazy<ObservableCollection<ScoreViewModel>>(() =>
             {
                 return new ObservableCollection<ScoreViewModel>(players.Select(p => new ScoreViewModel(p.Name, p.GetScore(gameName))).OrderByDescending(s => s.Score));
@@ -38,10 +39,7 @@ namespace YouthClubApp.ViewModels
         public ICommand ButtonCommand { get; }
         public string Name { get; }
 
-        public ObservableCollection<ScoreViewModel> Scores
-        {
-            get { return scores.Value; }
-        }
+        public ObservableCollection<ScoreViewModel> Scores => scores.Value;
 
         private void OnClose(object parameter)
         {
