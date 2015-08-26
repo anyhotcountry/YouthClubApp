@@ -2,13 +2,13 @@
 {
     public class TestPhysics : IGunAimPhysics
     {
-        private readonly double x;
-        private readonly double y;
+        private readonly double fixedX;
+        private readonly double fixedY;
 
         public TestPhysics(double x, double y)
         {
-            this.x = x;
-            this.y = y;
+            fixedX = x;
+            fixedY = y;
         }
 
         public int GetScore(HitTypes hitType)
@@ -22,12 +22,12 @@
 
         public double NextX(double x)
         {
-            return this.x;
+            return fixedX;
         }
 
         public double NextY(double y)
         {
-            return this.y;
+            return fixedY;
         }
     }
 }
